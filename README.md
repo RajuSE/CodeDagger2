@@ -109,9 +109,9 @@ public class MyAppModule {
 
 
 # Explanation:
-@Module : identify this class as a Dagger module.
-@Provides: Identify method as an injection provider.
-@Singleton : returns a unique instance.
+* @Module : identify this class as a Dagger module.
+* @Provides: Identify method as an injection provider.
+* @Singleton : returns a unique instance.
 
 
 
