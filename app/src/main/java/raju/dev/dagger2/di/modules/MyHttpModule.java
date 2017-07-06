@@ -1,6 +1,7 @@
 package raju.dev.dagger2.di.modules;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,7 +18,6 @@ import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -27,21 +27,26 @@ import okhttp3.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Retrofit;
 
-@Module
+@Module(includes = MyContextModule.class)
 public class MyHttpModule {
 
     String mBaseUrl;
     ConnectivityManager connectivityManager;
 
-    public MyHttpModule(String baseUrl, ConnectivityManager connectivityManager) {
+    public MyHttpModule(String baseUrl) {
         this.mBaseUrl = baseUrl;
-        this.connectivityManager = connectivityManager;
     }
 
     @Provides
     @Singleton
     SharedPreferences providesSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
+    }
+
+    @Provides
+    @Singleton
+    ConnectivityManager providesConnectivityManager(Context context) {
+        return connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     @Provides
@@ -63,7 +68,7 @@ public class MyHttpModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(Cache cache) {
+    OkHttpClient provideOkHttpClient(Cache cache, ConnectivityManager connectivityManager) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .cache(cache)
                 .addInterceptor(new RequestInterceptor(connectivityManager))
@@ -82,7 +87,7 @@ public class MyHttpModule {
         return retrofit;
     }
 
-    public class RequestInterceptor implements Interceptor {
+    private class RequestInterceptor implements Interceptor {
 
         final ConnectivityManager connectivityManager;
 
@@ -107,14 +112,15 @@ public class MyHttpModule {
 
     }
 
-    class NoInternetException extends IOException{
+    class NoInternetException extends IOException {
 
         String message;
+
         public NoInternetException(String s) {
-            this.message =s;
+            this.message = s;
         }
 
-        String getMessaget(){
+        String getMessaget() {
             return message;
         }
     }
