@@ -2,14 +2,14 @@ package raju.dev.dagger2;
 
 import android.app.Application;
 
-import raju.dev.dagger2.di.components.DaggerViewsApiComponent;
 import raju.dev.dagger2.di.components.DaggerHttpComponent;
+import raju.dev.dagger2.di.components.DaggerViewsApiComponent;
 import raju.dev.dagger2.di.components.ViewsApiComponent;
 import raju.dev.dagger2.di.components.HttpComponent;
 import raju.dev.dagger2.di.modules.MyContextModule;
 import raju.dev.dagger2.di.modules.MyAppModule;
 import raju.dev.dagger2.di.modules.MyHttpModule;
-import raju.dev.dagger2.di.modules.MyViewsApiModule;
+import raju.dev.dagger2.di.modules.ViewsApiModule;
 
 
 public class MyApp extends Application {
@@ -21,8 +21,6 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         // specify the full namespace of the component
         // Dagger_xxxx (where xxxx = component name)
         mHttpComponent = DaggerHttpComponent.builder()
@@ -33,9 +31,8 @@ public class MyApp extends Application {
 
         mViewsApiComponent = DaggerViewsApiComponent.builder()
                 .httpComponent(mHttpComponent)
-                .myViewsApiModule(new MyViewsApiModule())
+                .viewsApiModule(new ViewsApiModule())
                 .build();
-
     }
 
     public HttpComponent getNetComponent() {

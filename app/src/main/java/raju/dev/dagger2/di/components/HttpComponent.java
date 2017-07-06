@@ -15,7 +15,7 @@ import raju.dev.dagger2.di.modules.MyHttpModule;
 import retrofit2.Retrofit;
 
 @Singleton
-@Component(modules={MyAppModule.class, MyHttpModule.class})
+@Component(modules = {MyAppModule.class, MyHttpModule.class})//, MyContextModule.class
 public interface HttpComponent {
     // downstream components need these exposed
     Retrofit retrofit();

@@ -8,7 +8,7 @@ import raju.dev.dagger2.di.scopes.UserScope;
 import retrofit2.Retrofit;
 
 @Module
-public class MyViewsApiModule {
+public class ViewsApiModule {
 
     @Provides
     @UserScope

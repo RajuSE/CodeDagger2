@@ -31,7 +31,6 @@ import retrofit2.Retrofit;
 public class MyHttpModule {
 
     String mBaseUrl;
-    ConnectivityManager connectivityManager;
 
     public MyHttpModule(String baseUrl) {
         this.mBaseUrl = baseUrl;
@@ -46,7 +45,7 @@ public class MyHttpModule {
     @Provides
     @Singleton
     ConnectivityManager providesConnectivityManager(Context context) {
-        return connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     @Provides
