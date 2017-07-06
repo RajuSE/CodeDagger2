@@ -2,19 +2,28 @@ package raju.dev.dagger2.di.modules;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+
 import okhttp3.Cache;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Retrofit;
 
@@ -22,9 +31,11 @@ import retrofit2.Retrofit;
 public class MyHttpModule {
 
     String mBaseUrl;
+    ConnectivityManager connectivityManager;
 
-    public MyHttpModule(String baseUrl) {
+    public MyHttpModule(String baseUrl, ConnectivityManager connectivityManager) {
         this.mBaseUrl = baseUrl;
+        this.connectivityManager = connectivityManager;
     }
 
     @Provides
@@ -55,6 +66,7 @@ public class MyHttpModule {
     OkHttpClient provideOkHttpClient(Cache cache) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .cache(cache)
+                .addInterceptor(new RequestInterceptor(connectivityManager))
                 .build();
         return okHttpClient;
     }
@@ -68,5 +80,42 @@ public class MyHttpModule {
                 .client(okHttpClient)
                 .build();
         return retrofit;
+    }
+
+    public class RequestInterceptor implements Interceptor {
+
+        final ConnectivityManager connectivityManager;
+
+        public RequestInterceptor(ConnectivityManager connectivityManager) {
+            this.connectivityManager = connectivityManager;
+        }
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            if (!isConnected()) {
+                throw new NoInternetException("NoInternetException");
+            }
+
+            Request.Builder r = chain.request().newBuilder();
+            return chain.proceed(r.build());
+        }
+
+        protected boolean isConnected() {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnectedOrConnecting();
+        }
+
+    }
+
+    class NoInternetException extends IOException{
+
+        String message;
+        public NoInternetException(String s) {
+            this.message =s;
+        }
+
+        String getMessaget(){
+            return message;
+        }
     }
 }
