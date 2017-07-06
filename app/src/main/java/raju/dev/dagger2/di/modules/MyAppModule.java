@@ -1,4 +1,4 @@
-package rajusugale.dev.dagger2.di.modules;
+package raju.dev.dagger2.di.modules;
 
 import android.app.Application;
 

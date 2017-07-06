@@ -1,4 +1,4 @@
-package rajusugale.dev.dagger2.models;
+package raju.dev.dagger2.models;
 
 public class Repository {
 

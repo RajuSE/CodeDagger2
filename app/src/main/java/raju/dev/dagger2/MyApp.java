@@ -1,14 +1,14 @@
-package rajusugale.dev.dagger2;
+package raju.dev.dagger2;
 
 import android.app.Application;
 
-import rajusugale.dev.dagger2.di.components.DaggerViewsApiComponent;
-import rajusugale.dev.dagger2.di.components.DaggerHttpComponent;
-import rajusugale.dev.dagger2.di.components.ViewsApiComponent;
-import rajusugale.dev.dagger2.di.components.HttpComponent;
-import rajusugale.dev.dagger2.di.modules.MyAppModule;
-import rajusugale.dev.dagger2.di.modules.MyHttpModule;
-import rajusugale.dev.dagger2.di.modules.ViewsApiModule;
+import raju.dev.dagger2.di.components.DaggerViewsApiComponent;
+import raju.dev.dagger2.di.components.DaggerHttpComponent;
+import raju.dev.dagger2.di.components.ViewsApiComponent;
+import raju.dev.dagger2.di.components.HttpComponent;
+import raju.dev.dagger2.di.modules.MyAppModule;
+import raju.dev.dagger2.di.modules.MyHttpModule;
+import raju.dev.dagger2.di.modules.ViewsApiModule;
 
 
 public class MyApp extends Application {

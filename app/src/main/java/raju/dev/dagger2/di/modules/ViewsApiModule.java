@@ -1,11 +1,11 @@
-package rajusugale.dev.dagger2.di.modules;
+package raju.dev.dagger2.di.modules;
 
 
 import dagger.Module;
 import dagger.Provides;
-import rajusugale.dev.dagger2.ViewsApiEnd;
-import rajusugale.dev.dagger2.di.scopes.UserScope;
-import retrofit.Retrofit;
+import raju.dev.dagger2.ViewsApiEnd;
+import raju.dev.dagger2.di.scopes.UserScope;
+import retrofit2.Retrofit;
 
 @Module
 public class ViewsApiModule {

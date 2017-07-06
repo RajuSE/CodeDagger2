@@ -1,4 +1,4 @@
-package rajusugale.dev.dagger2;
+package raju.dev.dagger2;
 
 import org.junit.Test;
 

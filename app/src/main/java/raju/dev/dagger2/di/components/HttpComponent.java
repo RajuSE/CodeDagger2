@@ -1,17 +1,17 @@
-package rajusugale.dev.dagger2.di.components;
+package raju.dev.dagger2.di.components;
 
 
 import android.content.SharedPreferences;
 
 
-import com.squareup.okhttp.OkHttpClient;
+import okhttp3.OkHttpClient;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import rajusugale.dev.dagger2.di.modules.MyAppModule;
-import rajusugale.dev.dagger2.di.modules.MyHttpModule;
-import retrofit.Retrofit;
+import raju.dev.dagger2.di.modules.MyAppModule;
+import raju.dev.dagger2.di.modules.MyHttpModule;
+import retrofit2.Retrofit;
 
 @Singleton
 @Component(modules={MyAppModule.class, MyHttpModule.class})

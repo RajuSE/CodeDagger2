@@ -1,4 +1,4 @@
-package rajusugale.dev.dagger2;
+package raju.dev.dagger2;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("rajusugale.com.codedaggertwo", appContext.getPackageName());
+        assertEquals("raju.com.codedaggertwo", appContext.getPackageName());
     }
 }

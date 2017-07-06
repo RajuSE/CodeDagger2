@@ -1,6 +1,7 @@
-package rajusugale.dev.dagger2;
+package raju.dev.dagger2;
 
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,11 +16,11 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rajusugale.dev.dagger2.models.Repository;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import raju.dev.dagger2.models.Repository;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,21 +69,21 @@ public class MainActivity extends AppCompatActivity {
 
                 call.enqueue(new Callback<ArrayList<Repository>>() {
                     @Override
-                    public void onResponse(Response<ArrayList<Repository>> response, Retrofit retrofit) {
-                        if (response.isSuccess()) {
+                    public void onResponse(@NonNull Call<ArrayList<Repository>> call, @NonNull Response<ArrayList<Repository>> response) {
+                        if (response.code()==200) {
                             Log.i("DEBUG", response.body().toString());
                             Snackbar.make(view,"Data retrieved.. Good Job!", Snackbar.LENGTH_LONG)
                                     .setAction("Action",null).show();
 
                             String s=updateCounter();
-                           ArrayList<Repository> list= response.body();
+                            ArrayList<Repository> list= response.body();
                             String strlist="";
                             for (int i=0; i<list.size(); i++){
                                 strlist=strlist+list.get(i).getFullName()+ "\n";
                             }
 
                             if(mRetrofit!=null)
-                            tv_response.setText(s+"\nRetrofit Dependency Injection Worked!\n\nYou've Created Repos: \n"+strlist);
+                                tv_response.setText(s+"\nRetrofit Dependency Injection Worked!\n\nYou've Created Repos: \n"+strlist);
                             else {
                                 tv_response.setText(s+"\n\nRetrofit Dependency Injection NOT WORKING!");
                             }
@@ -94,10 +95,11 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onFailure(Call<ArrayList<Repository>> call, Throwable t) {
                         tv_response.setText("Retrofit onFailure got called :(");
-
                     }
+
+
                 });
             }
 
