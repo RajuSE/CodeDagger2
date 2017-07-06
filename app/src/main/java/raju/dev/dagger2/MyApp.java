@@ -29,7 +29,7 @@ public class MyApp extends Application {
         // Dagger_xxxx (where xxxx = component name)
         mHttpComponent = DaggerHttpComponent.builder()
                 .myAppModule(new MyAppModule(this))
-                .myHttpModule(new MyHttpModule("https://api.github.com",cm))
+                .myHttpModule(new MyHttpModule("https://api.github.com", cm))
                 .build();
 
         mViewsApiComponent = DaggerViewsApiComponent.builder()
