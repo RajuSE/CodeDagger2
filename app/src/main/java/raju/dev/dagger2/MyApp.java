@@ -31,8 +31,9 @@ public class MyApp extends Application {
 
         mViewsApiComponent = DaggerViewsApiComponent.builder()
                 .httpComponent(mHttpComponent)
-                .viewsApiModule(new ViewsApiModule())
                 .build();
+        //TODO NOTE: For Explicitly created Constructor of Module, You must call Module (like  .viewsApiModule(new ViewsApiModule()))
+        // For DC, you don't need to specify that module.(E.g. ViewsApiModule). This is one of feature of Dagger2.
     }
 
     public HttpComponent getNetComponent() {
