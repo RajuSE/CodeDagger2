@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -16,13 +17,19 @@ public class SecondActivity extends AppCompatActivity {
     @Inject  //Uncommenting This line will not Inject DI.. Please Try this case..
             SharedPreferences mSharedPreferences;//Sit back relax
 
+    @Inject //DI
+            ViewsApiEnd mViewsApiEnd;
+
     @BindView(R.id.tv_launchCounter)
     TextView tv_font;
     @BindView(R.id.response)
     TextView tv_response;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    @Inject  //Uncommenting This line will not Inject DI.. Please Try this case..
+            SharedPreferences mSharedPreferences2;
+    @Inject //DI
+            ViewsApiEnd mViewsApiEnd2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,7 @@ public class SecondActivity extends AppCompatActivity {
 
         updateCounter();
 
+        logInstances();
     }
 
     private String updateCounter() {
@@ -57,5 +65,11 @@ public class SecondActivity extends AppCompatActivity {
         return "SharedPreferences Dependency Injection Worked!";
     }
 
+    void logInstances() {
+        Log.i("isSameInstance2:", "mSharedPreferences" + mSharedPreferences);
+        Log.i("isSameInstance2:", "mSharedPreferences2" + mSharedPreferences2);
+        Log.i("isSameInstance2:", "mViewsApiEnd" + mViewsApiEnd);
+        Log.i("isSameInstance2:", "mViewsApiEnd2" + mViewsApiEnd2);
+    }
 
 }

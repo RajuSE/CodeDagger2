@@ -43,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.btnSecondActivity)
     Button btnSecondActivity;
-
+    @Inject  //Uncommenting This line will not Inject DI.. Please Try this case..
+            SharedPreferences mSharedPreferences2;
+    @Inject //DI
+            ViewsApiEnd mViewsApiEnd2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +121,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        logInstances();
+
+    }
+
+    void logInstances() {
+        Log.i("isSameInstance1:", "mSharedPreferences" + mSharedPreferences);
+        Log.i("isSameInstance1:", "mSharedPreferences2" + mSharedPreferences2);
+        Log.i("isSameInstance1:", "mViewsApiEnd" + mViewsApiEnd);
+        Log.i("isSameInstance1:", "mViewsApiEnd2" + mViewsApiEnd2);//Scope concept
     }
 
     private String updateCounter() {

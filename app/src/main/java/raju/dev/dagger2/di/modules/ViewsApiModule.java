@@ -12,6 +12,10 @@ public class ViewsApiModule {
 
     @Provides
     @UserScope
+//TODO Uncommenting UserScope creates different objects of ViewsApiEnd (Nice Article-http://frogermcs.github.io/dependency-injection-with-dagger-2-custom-scopes/)
+    //UserScope - custom scope for user(User login to logout)
+    //Singletone - Application scope
+    //ActivityScope - custom scope for activity
     public ViewsApiEnd providesGitHubInterface(Retrofit retrofit) {
         return retrofit.create(ViewsApiEnd.class);
     }
