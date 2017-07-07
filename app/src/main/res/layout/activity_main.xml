@@ -7,8 +7,10 @@ xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_paren
 android:layout_height="match_parent" android:fitsSystemWindows="true"
 tools:context=".MainActivity">
 
-<android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-    android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
     <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
         android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
@@ -18,53 +20,62 @@ tools:context=".MainActivity">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <TextView
             android:id="@+id/buttonRefreshh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#FFF0"
+            android:gravity="center_horizontal"
             android:text=" Refresh Now "
+            android:textColor="@color/colorPrimary"
             android:textSize="25sp"
             android:textStyle="normal"
-            android:textColor="@color/colorPrimary"
-            android:gravity="center_horizontal"
-            android:background="#FFF0"
             />
 <TextView
     android:id="@+id/tv_launchCounter"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
     android:layout_marginTop="20dp"
+    android:gravity="center_horizontal"
     android:text="Hi, This is Views Counter :)"
+    android:textColor="@color/colorPrimary"
     android:textSize="25sp"
     android:textStyle="bold"
-    android:textColor="@color/colorPrimary"
 
     />
         <TextView
             android:id="@+id/response"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_below="@+id/tv_launchCounter"
-            android:textStyle="italic"
             android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
             android:text="Response:"
             android:textSize="15sp"
+            android:textStyle="italic"
             />
 
+        <Button
+            android:id="@+id/btnSecondActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/response"
+            android:layout_marginTop="20dp"
+            android:text="SecondActivity"
+            android:textStyle="normal" />
 
 
     </LinearLayout>
